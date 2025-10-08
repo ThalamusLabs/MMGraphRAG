@@ -54,7 +54,7 @@ input:
   storage:
     type: {graphrag_config_defaults.input.storage.type.value} # or blob
     base_dir: "{graphrag_config_defaults.input.storage.base_dir}"
-  file_type: {graphrag_config_defaults.input.file_type.value} # [csv, text, json]
+  file_type: {graphrag_config_defaults.input.file_type.value} # [csv, text, json, image]
 
 chunks:
   size: {graphrag_config_defaults.chunks.size}

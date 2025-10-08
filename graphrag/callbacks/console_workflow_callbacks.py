@@ -20,6 +20,7 @@ class ConsoleWorkflowCallbacks(NoopWorkflowCallbacks):
 
     def pipeline_start(self, names: list[str]) -> None:
         """Execute this callback to signal when the entire pipeline starts."""
+        print("Starting pipeline with custom multi modal support")
         print("Starting pipeline with workflows:", ", ".join(names))
 
     def pipeline_end(self, results: list[PipelineRunResult]) -> None:

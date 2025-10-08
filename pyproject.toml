@@ -67,6 +67,8 @@ dependencies = [
     "textblob>=0.18.0.post0",
     "spacy>=3.8.4",
     "litellm>=1.77.1",
+    # Image processing (optional, used when InputFileType.image is selected)
+    "Pillow>=10.4.0",
 ]
 
 [dependency-groups]

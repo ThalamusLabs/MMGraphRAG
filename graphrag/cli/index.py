@@ -125,6 +125,8 @@ def _run_index(
     if not skip_validation:
         validate_config_names(config)
 
+    logger.info("--- Running Custom Version with Multi-Modal Support ---")
+
     logger.info("Starting pipeline run. %s", dry_run)
     logger.info(
         "Using default configuration: %s",
