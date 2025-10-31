@@ -73,8 +73,6 @@ async def build_index(
     logger.info("Initializing indexing pipeline...")
     # todo: this could propagate out to the cli for better clarity, but will be a breaking api change
     method = _get_method(method, is_update_run)
-    print(method)
-    print(config)
     pipeline = PipelineFactory.create_pipeline(config, method)
 
     workflow_callbacks.pipeline_start(pipeline.names())
