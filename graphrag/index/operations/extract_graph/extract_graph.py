@@ -59,7 +59,8 @@ async def extract_graph(
         )
         num_started += 1
         return [result.entities, result.relationships, result.graph]
-
+    print(f"Starting extraction for {len(text_units)} text units")
+    print(text_units)
     results = await derive_from_rows(
         text_units,
         run_strategy,
