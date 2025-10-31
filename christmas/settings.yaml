@@ -46,21 +46,11 @@ models:
 
 ### Input settings ###
 
-# input:
-#   storage:
-#     type: file # or blob
-#     base_dir: "input"
-#   file_type: csv # [csv, text, json]
 input:
-  type: file # Use 'blob' if processing data from blob storage
-  file_type: csv
-  base_dir: "input"
-  file_encoding: "utf-8"
-  file_pattern: ".*\\.csv$"
-  source_column: "source"            
-  text_column: "text"
-  timestamp_column: "timestamp"
-  timestamp_format: "%Y-%m-%d"
+  storage:
+    type: file # or blob
+    base_dir: "input"
+  file_type: csv # [csv, text, json]
 
 chunks:
   size: 1200
