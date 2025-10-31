@@ -43,7 +43,7 @@ async def run_workflow(
         prepend_metadata=chunks.prepend_metadata,
         chunk_size_includes_metadata=chunks.chunk_size_includes_metadata,
     )
-
+    print(output.columns)
     print(output.head())
 
     await write_table_to_storage(output, "text_units", context.output_storage)
