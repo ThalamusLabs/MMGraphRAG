@@ -280,6 +280,7 @@ class AzureOpenAIChatFNLLM:
         -------
             The response from the Model.
         """
+        print("Reponse fired from AzureOpenAIChatFNLLM")  # --- IGNORE ---
         if history is None:
             response = await self.model(prompt, **kwargs)
         else:
