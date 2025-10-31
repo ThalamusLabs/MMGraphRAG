@@ -10,9 +10,11 @@
 			"args": [
 				"index",
 				"--root", 
-				"<path_to_index_folder>"
+				"/Users/abrandsma/main/personal/MMGraphRAG"
 			],
-			"console": "integratedTerminal"
+			"console": "integratedTerminal",
+			"python": "${workspaceFolder}/.venv/bin/python",
+			"justMyCode": false
 		},
 		{
 			"name": "Query",
@@ -25,18 +27,24 @@
 				"<path_to_index_folder>",
 				"--method", "basic",
 				"--query", "What are the top themes in this story",
-			]
+			],
+			"console": "integratedTerminal",
+			"python": "${workspaceFolder}/.venv/bin/python",
+			"justMyCode": false
 		},
 		{
 			"name": "Prompt Tuning",
 			"type": "debugpy",
 			"request": "launch",
-			"module": "uv",
+			"module": "graphrag",
 			"args": [
-				"poe", "prompt-tune",
+				"prompt-tune",
 				"--config",
 				"<path_to_ragtest_root_demo>/settings.yaml",
-			]
+			],
+			"console": "integratedTerminal",
+			"python": "${workspaceFolder}/.venv/bin/python",
+			"justMyCode": false
 		},
 		{
 			"name": "Debug Integration Pytest",
@@ -48,6 +56,7 @@
 				"-k", "test_azure_ai_search"
 			],
 			"console": "integratedTerminal",
+			"python": "${workspaceFolder}/.venv/bin/python",
     		"justMyCode": false 
 		},
 		{
@@ -60,6 +69,7 @@
 				"-k", "test_generate_text_embeddings"
 			],
 			"console": "integratedTerminal",
+			"python": "${workspaceFolder}/.venv/bin/python",
     		"justMyCode": false 
 		},
 		{
@@ -72,7 +82,38 @@
 				"-k", "test_fixtures"
 			],
 			"console": "integratedTerminal",
+			"python": "${workspaceFolder}/.venv/bin/python",
     		"justMyCode": false 
 		},
+		{
+			"name": "Debug Current Python File",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "${file}",
+			"console": "integratedTerminal",
+			"python": "${workspaceFolder}/.venv/bin/python",
+			"justMyCode": false,
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"name": "Indexer (UV Run)",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "${workspaceFolder}/.venv/bin/python",
+			"args": [
+				"-m",
+				"graphrag",
+				"index",
+				"--root", 
+				"${workspaceFolder}"
+			],
+			"console": "integratedTerminal",
+			"python": "${workspaceFolder}/.venv/bin/python",
+			"justMyCode": false,
+			"cwd": "${workspaceFolder}",
+			"env": {
+				"PYTHONPATH": "${workspaceFolder}"
+			}
+		}
 	]
 }

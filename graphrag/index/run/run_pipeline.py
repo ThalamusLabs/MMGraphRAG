@@ -116,13 +116,9 @@ async def _run_pipeline(
         logger.info("Executing pipeline...")
         print("-------")
         for name, workflow_function in pipeline.run():
-            print("Starting workflow:", name)
             last_workflow = name
-            print("Starting workflow:", name)
             context.callbacks.workflow_start(name, None)
-            print("Starting workflow:", name)
             work_time = time.time()
-            print("Starting workflow:", name)
             result = await workflow_function(config, context)
             print("Result of workflow", name, ":", result)
             context.callbacks.workflow_end(name, result)

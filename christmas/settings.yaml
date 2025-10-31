@@ -50,7 +50,7 @@ input:
   storage:
     type: file # or blob
     base_dir: "input"
-  file_type: image # [csv, text, json]
+  file_type: jpg # [csv, text, json]
   
 
 chunks:
