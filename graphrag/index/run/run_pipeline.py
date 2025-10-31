@@ -114,17 +114,22 @@ async def _run_pipeline(
         await _dump_json(context)
 
         logger.info("Executing pipeline...")
+        print("-------")
         for name, workflow_function in pipeline.run():
+            print("Starting workflow:", name)
             last_workflow = name
             context.callbacks.workflow_start(name, None)
             work_time = time.time()
             result = await workflow_function(config, context)
+            print("Result of workflow", name, ":", result)
             context.callbacks.workflow_end(name, result)
             yield PipelineRunResult(
                 workflow=name, result=result.result, state=context.state, errors=None
             )
+            print("Yielded result for workflow:", name)
             context.stats.workflows[name] = {"overall": time.time() - work_time}
             if result.stop:
+                print("Halting pipeline at workflow request")
                 logger.info("Halting pipeline at workflow request")
                 break
 
