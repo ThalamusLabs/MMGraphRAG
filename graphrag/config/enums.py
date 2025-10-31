@@ -36,7 +36,7 @@ class InputFileType(str, Enum):
     """The text input type."""
     json = "json"
     """The JSON input type."""
-    image = "jpg"
+    jpg = "jpg"
     """The image input type."""
 
     def __repr__(self):

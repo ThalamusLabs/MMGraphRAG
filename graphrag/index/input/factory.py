@@ -22,7 +22,7 @@ loaders: dict[str, Callable[..., Awaitable[pd.DataFrame]]] = {
     InputFileType.text: load_text,
     InputFileType.csv: load_csv,
     InputFileType.json: load_json,
-    InputFileType.image: load_image,
+    InputFileType.jpg: load_image,
 }
 
 

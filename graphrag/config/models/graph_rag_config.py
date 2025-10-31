@@ -146,7 +146,7 @@ class GraphRagConfig(BaseModel):
         if len(self.input.file_pattern) == 0:
             if self.input.file_type == defs.InputFileType.text:
                 self.input.file_pattern = ".*\\.txt$"
-            elif self.input.file_type == defs.InputFileType.image:
+            elif self.input.file_type == defs.InputFileType.jpg:
                 # Match common raster image extensions (case-insensitive handled by regex engine flags when used)
                 self.input.file_pattern = ".*\\.(png|jpg|jpeg|gif|bmp|tiff|webp)$"
             else:
