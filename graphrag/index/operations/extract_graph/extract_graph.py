@@ -99,6 +99,7 @@ def _load_strategy(strategy_type: ExtractEntityStrategyType) -> EntityExtractStr
 
 def _merge_entities(entity_dfs) -> pd.DataFrame:
     all_entities = pd.concat(entity_dfs, ignore_index=True)
+    print(all_entities.head())
     return (
         all_entities.groupby(["title", "type"], sort=False)
         .agg(
