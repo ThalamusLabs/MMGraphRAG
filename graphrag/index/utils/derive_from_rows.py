@@ -43,14 +43,17 @@ async def derive_from_rows(
     callbacks = callbacks or NoopWorkflowCallbacks()
     match async_type:
         case AsyncType.AsyncIO:
+            print("Calling derive_from_rows_asyncio")  # --- IGNORE ---
             return await derive_from_rows_asyncio(
                 input, transform, callbacks, num_threads, progress_msg
             )
         case AsyncType.Threaded:
+            print("Calling derive_from_rows_asyncio_threads")  # --- IGNORE ---
             return await derive_from_rows_asyncio_threads(
                 input, transform, callbacks, num_threads, progress_msg
             )
         case _:
+            print("Unsupported scheduling type")  # --- IGNORE ---
             msg = f"Unsupported scheduling type {async_type}"
             raise ValueError(msg)
 
