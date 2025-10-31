@@ -13,6 +13,7 @@ class Pipeline:
 
     def __init__(self, workflows: list[Workflow]):
         self.workflows = workflows
+        print("Running pipeline with workflows:", [name for name, _ in self.workflows])
 
     def run(self) -> Generator[Workflow]:
         """Return a Generator over the pipeline workflows."""
