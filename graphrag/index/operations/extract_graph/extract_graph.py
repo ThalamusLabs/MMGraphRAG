@@ -98,7 +98,20 @@ def _load_strategy(strategy_type: ExtractEntityStrategyType) -> EntityExtractStr
 
 
 def _merge_entities(entity_dfs) -> pd.DataFrame:
+    # Debug: Print top 10 values of entity_dfs
+    print("Top 10 entity_dfs:")
+    for i, df in enumerate(entity_dfs[:10]):
+        print(f"DataFrame {i}:")
+        print(df.head())
+        print("---")
+    
     all_entities = pd.concat(entity_dfs, ignore_index=True)
+    
+    # Debug: Print top 10 values of all_entities
+    print("Top 10 all_entities:")
+    print(all_entities.head(10))
+    print("---")
+    
     return (
         all_entities.groupby(["title", "type"], sort=False)
         .agg(
@@ -117,7 +130,6 @@ def _merge_relationships(relationship_dfs) -> pd.DataFrame:
         .agg(
             description=("description", list),
             text_unit_ids=("source_id", list),
-            weight=("weight", "sum"),
         )
         .reset_index()
     )
