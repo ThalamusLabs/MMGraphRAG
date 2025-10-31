@@ -44,6 +44,8 @@ async def run_workflow(
         chunk_size_includes_metadata=chunks.chunk_size_includes_metadata,
     )
 
+    print(output.head())
+
     await write_table_to_storage(output, "text_units", context.output_storage)
 
     logger.info("Workflow completed: create_base_text_units")
