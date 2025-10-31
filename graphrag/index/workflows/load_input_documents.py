@@ -40,4 +40,5 @@ async def load_input_documents(
     config: InputConfig, storage: PipelineStorage
 ) -> pd.DataFrame:
     """Load and parse input documents into a standard format."""
+    print("Running Load Input Documents workflow step")
     return await create_input(config, storage)
