@@ -68,7 +68,7 @@ async def extract_graph(
         num_threads=num_threads,
         progress_msg="extract graph progress: ",
     )
-
+    print(results)
     entity_dfs = []
     relationship_dfs = []
     for result in results:
@@ -76,6 +76,7 @@ async def extract_graph(
             entity_dfs.append(pd.DataFrame(result[0]))
             relationship_dfs.append(pd.DataFrame(result[1]))
 
+    print(f"Started extraction for {entity_dfs} text units")
     entities = _merge_entities(entity_dfs)
     relationships = _merge_relationships(relationship_dfs)
 
@@ -98,6 +99,7 @@ def _load_strategy(strategy_type: ExtractEntityStrategyType) -> EntityExtractStr
 
 
 def _merge_entities(entity_dfs) -> pd.DataFrame:
+    print(entity_dfs)
     all_entities = pd.concat(entity_dfs, ignore_index=True)
     print(all_entities.head())
     return (
