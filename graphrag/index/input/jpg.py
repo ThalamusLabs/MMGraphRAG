@@ -64,13 +64,12 @@ async def load_jpg(
             "exif_data": str(exif_data) if exif_data else "",
         }
         
-        data = pd.DataFrame([new_item])
-        data["id"] = gen_sha512_hash(new_item, ["text", "image_width", "image_height"])
-        data["title"] = str(Path(path).name)
-        data["creation_date"] = await storage.get_creation_date(path)
+        new_item["id"] = gen_sha512_hash(new_item, ["text", "image_width", "image_height"])
+        new_item["title"] = str(Path(path).name)
+        new_item["creation_date"] = await storage.get_creation_date(path)
 
-        print(data.head())
+        print(new_item)
         
-        return data
+        return pd.DataFrame([new_item])
 
     return await load_files(load_file, config, storage)
