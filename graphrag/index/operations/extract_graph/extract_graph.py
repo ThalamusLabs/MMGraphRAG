@@ -57,6 +57,7 @@ async def extract_graph(
             cache,
             strategy_config,
         )
+        print(f"Result: {result}")  # --- IGNORE ---
         num_started += 1
         return [result.entities, result.relationships, result.graph]
 
