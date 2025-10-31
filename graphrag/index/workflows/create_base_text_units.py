@@ -62,6 +62,7 @@ def create_base_text_units(
     chunk_size_includes_metadata: bool = False,
 ) -> pd.DataFrame:
     """All the steps to transform base text_units."""
+    print("Creating base text units with chunk size:", size)
     sort = documents.sort_values(by=["id"], ascending=[True])
 
     sort["text_with_ids"] = list(

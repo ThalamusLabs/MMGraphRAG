@@ -49,8 +49,6 @@ async def load_image(
     """
     logger.info("Loading image files from %s", config.storage.base_dir)
 
-    print("Loading image files from", config.storage.base_dir)
-
     async def load_file(path: str, group: dict | None = None) -> pd.DataFrame:  # type: ignore[override]
         if group is None:
             group = {}
@@ -98,7 +96,6 @@ async def load_image(
 
         return pd.DataFrame([new_item])
 
-    print("load files finished")
     return await load_files(load_file, config, storage)
 
 
