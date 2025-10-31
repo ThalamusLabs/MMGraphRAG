@@ -78,6 +78,7 @@ class OpenAIChatFNLLM:
         -------
             The response from the Model.
         """
+        print(prompt)
         if history is None:
             response = await self.model(prompt, **kwargs)
         else:
