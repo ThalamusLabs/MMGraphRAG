@@ -93,6 +93,7 @@ class ModelType(str, Enum):
     # Chat Completion
     OpenAIChat = "openai_chat"
     AzureOpenAIChat = "azure_openai_chat"
+    MultiModal = "multimodal_chat"
     Chat = "chat"
 
     # Debug

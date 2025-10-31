@@ -8,6 +8,7 @@ from typing import Any, ClassVar
 
 from graphrag.config.enums import ModelType
 from graphrag.language_model.protocol.base import ChatModel, EmbeddingModel
+from graphrag.language_model.providers.custom.multimodal_provider import MultiModalChatLLM
 from graphrag.language_model.providers.fnllm.models import (
     AzureOpenAIChatFNLLM,
     AzureOpenAIEmbeddingFNLLM,
@@ -110,6 +111,8 @@ ModelFactory.register_chat(
     ModelType.OpenAIChat.value, lambda **kwargs: OpenAIChatFNLLM(**kwargs)
 )
 ModelFactory.register_chat(ModelType.Chat, lambda **kwargs: LitellmChatModel(**kwargs))
+
+ModelFactory.register_chat(ModelType.MultiModal, lambda **kwargs: MultiModalChatLLM(**kwargs))
 
 ModelFactory.register_embedding(
     ModelType.AzureOpenAIEmbedding.value,
