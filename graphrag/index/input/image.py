@@ -98,6 +98,7 @@ async def load_image(
 
         return pd.DataFrame([new_item])
 
+    print("load files finished")
     return await load_files(load_file, config, storage)
 
 
