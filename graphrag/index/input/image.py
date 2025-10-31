@@ -78,9 +78,15 @@ async def load_image(
         synthetic_text = f"Image {Path(path).name} {width}x{height} mode={mode} format={fmt}"
         print("Synthetic text:", synthetic_text)
 
+        # Convert PIL Image to bytes for PyArrow compatibility
+        # Store as PNG to preserve quality and support all modes
+        image_buffer = BytesIO()
+        image.save(image_buffer, format="PNG")
+        image_bytes = image_buffer.getvalue()
+
         new_item: dict[str, Any] = {
             **group,
-            "image": image,
+            "image": image_bytes,  # Store as bytes instead of PIL Image
             "width": width,
             "height": height,
             "mode": mode,
