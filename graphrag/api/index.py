@@ -85,6 +85,8 @@ async def build_index(
         input_documents=input_documents,
     ):
         outputs.append(output)
+        print(len(outputs))
+        print(outputs)
         if output.errors and len(output.errors) > 0:
             logger.error("Workflow %s completed with errors", output.workflow)
         else:
