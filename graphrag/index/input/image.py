@@ -48,10 +48,13 @@ async def load_image(
     logic here to keep the loader minimal.
     """
     logger.info("Loading image files from %s", config.storage.base_dir)
+    print("Loading images")
 
     async def load_file(path: str, group: dict | None = None) -> pd.DataFrame:  # type: ignore[override]
         if group is None:
             group = {}
+
+        print("Loading image", path)
 
         logger.debug("Loading image %s", path)
 
@@ -62,15 +65,18 @@ async def load_image(
                 img.load()  # force load so we can safely keep a copy
                 image: Image.Image = img.copy()
         except Exception as e:  # noqa: BLE001
+            print("Failed to open image", path, ":", e)
             logger.warning("Failed to open image %s: %s", path, e)
             raise
 
         width, height = image.size
         fmt = image.format or ""  # format may be None
         mode = image.mode
+        print(f"Loaded image {path}: {width}x{height} mode={mode} format={fmt}")
 
         # Synthetic text description so downstream text-based stages have something.
         synthetic_text = f"Image {Path(path).name} {width}x{height} mode={mode} format={fmt}"
+        print("Synthetic text:", synthetic_text)
 
         new_item: dict[str, Any] = {
             **group,
@@ -93,9 +99,13 @@ async def load_image(
         new_item["id"] = gen_sha512_hash(hash_fields, hash_fields.keys())
         new_item["title"] = str(Path(path).name)
         new_item["creation_date"] = await storage.get_creation_date(path)
+        print("Generated id:", new_item["id"])
+
+        print("Returning DataFrame row for image", path)
 
         return pd.DataFrame([new_item])
 
+    print("Calling load_files")
     return await load_files(load_file, config, storage)
 
 
