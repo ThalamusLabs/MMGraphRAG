@@ -145,6 +145,7 @@ class MultiModalChatLLM:
         messages = self._build_messages(prompt, history, is_image)
 
         try:
+            print(messages)
             # Make API request using OpenAI SDK
             response = await self.async_client.chat.completions.create(
                 model=self.config.deployment_name,
