@@ -298,9 +298,10 @@ class AzureOpenAIChatFNLLM:
         ]
         if history is None:
             response = await self.model(prompt, **kwargs)
-            print(response)
+            print(response.text)
         else:
             response = await self.model(prompt, history=history, **kwargs)
+            print(response.text)
         return BaseModelResponse(
             output=BaseModelOutput(
                 content=response.output.content,
