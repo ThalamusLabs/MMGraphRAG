@@ -287,7 +287,7 @@ class AzureOpenAIChatFNLLM:
         prompt = json.dumps( {"content":[
             {
                 "type": "text",
-                "text": "What’s in this image?"
+                "text": "What’s in this image? Does it contain a yellow bus?"
             },
             {
                 "type": "image_url",
