@@ -26,7 +26,8 @@ async def run_workflow(
     text_units = await load_table_from_storage("text_units", context.output_storage)
 
     output = create_final_documents(documents, text_units)
-
+    print(output['title'].head())
+    print(output.columns)
     await write_table_to_storage(output, "documents", context.output_storage)
 
     logger.info("Workflow completed: create_final_documents")

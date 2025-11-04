@@ -60,7 +60,8 @@ async def extract_graph(
         print(f"Result: {result}")  # --- IGNORE ---
         num_started += 1
         return [result.entities, result.relationships, result.graph]
-
+    print(f"Starting extraction for {len(text_units)} text units")
+    print(text_units)
     results = await derive_from_rows(
         text_units,
         run_strategy,
@@ -69,7 +70,7 @@ async def extract_graph(
         num_threads=num_threads,
         progress_msg="extract graph progress: ",
     )
-
+    print(results)
     entity_dfs = []
     relationship_dfs = []
     for result in results:
@@ -77,6 +78,7 @@ async def extract_graph(
             entity_dfs.append(pd.DataFrame(result[0]))
             relationship_dfs.append(pd.DataFrame(result[1]))
 
+ 
     entities = _merge_entities(entity_dfs)
     relationships = _merge_relationships(relationship_dfs)
 
@@ -99,19 +101,8 @@ def _load_strategy(strategy_type: ExtractEntityStrategyType) -> EntityExtractStr
 
 
 def _merge_entities(entity_dfs) -> pd.DataFrame:
-    # Debug: Print top 10 values of entity_dfs
-    print("Top 10 entity_dfs:")
-    for i, df in enumerate(entity_dfs[:10]):
-        print(f"DataFrame {i}:")
-        print(df.head())
-        print("---")
     
     all_entities = pd.concat(entity_dfs, ignore_index=True)
-    
-    # Debug: Print top 10 values of all_entities
-    print("Top 10 all_entities:")
-    print(all_entities.head(10))
-    print("---")
     
     return (
         all_entities.groupby(["title", "type"], sort=False)

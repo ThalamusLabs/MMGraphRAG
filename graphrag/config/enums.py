@@ -39,6 +39,9 @@ class InputFileType(str, Enum):
     jpg = "jpg"
     """The image input type."""
 
+    jpg = "jpeg"
+    """The JPG input type."""
+
     def __repr__(self):
         """Get a string representation."""
         return f'"{self.value}"'
