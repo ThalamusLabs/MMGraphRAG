@@ -32,6 +32,7 @@ async def run_workflow(
 
     chunks = config.chunks
 
+    print(documents.columns)
 
     output = create_base_text_units(
         documents,
