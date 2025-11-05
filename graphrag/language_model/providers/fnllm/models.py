@@ -34,9 +34,7 @@ if TYPE_CHECKING:
 
     from graphrag.cache.pipeline_cache import PipelineCache
     from graphrag.callbacks.workflow_callbacks import WorkflowCallbacks
-    from graphrag.config.models.language_model_config import (
-        LanguageModelConfig,
-    )
+    from graphrag.config.models.language_model_config import LanguageModelConfig
 
 
 class OpenAIChatFNLLM:
@@ -78,7 +76,6 @@ class OpenAIChatFNLLM:
         -------
             The response from the Model.
         """
-        
         if history is None:
             response = await self.model(prompt, **kwargs)
         else:
@@ -281,10 +278,6 @@ class AzureOpenAIChatFNLLM:
         -------
             The response from the Model.
         """
-       
-
-        import json        
-
         if history is None:
             response = await self.model(prompt, **kwargs)
             print(response.output.content)
