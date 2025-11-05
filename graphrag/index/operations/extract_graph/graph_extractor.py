@@ -145,7 +145,7 @@ class GraphExtractor:
         self, doc: Document, prompt_variables: dict[str, str]
     ) -> str:
 
-       
+        print(doc.doc_type)
         if doc.doc_type == "jpeg":
             import json
             print("running IMAGE")
