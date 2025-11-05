@@ -33,7 +33,7 @@ async def run_workflow(
     chunks = config.chunks
 
     print(documents.columns)
-    if  documents["doc_type"].iloc[0] == "image":
+    if  documents["doc_type"].iloc[0] == "jpeg":
 
         output = create_base_image_units(documents=documents)
 
