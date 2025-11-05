@@ -149,6 +149,7 @@ class GraphExtractor:
         if doc.doc_type == "jpeg":
             import json
             print("running IMAGE")
+            print(doc.text)
             prompt = json.dumps( {"content":[
                 {
                     "type": "text",
