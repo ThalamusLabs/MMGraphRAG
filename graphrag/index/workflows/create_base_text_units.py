@@ -33,18 +33,22 @@ async def run_workflow(
     chunks = config.chunks
 
     print(documents.columns)
+    if  documents["doc_type"].first() == "image":
 
-    output = create_base_text_units(
-        documents,
-        context.callbacks,
-        chunks.group_by_columns,
-        chunks.size,
-        chunks.overlap,
-        chunks.encoding_model,
-        strategy=chunks.strategy,
-        prepend_metadata=chunks.prepend_metadata,
-        chunk_size_includes_metadata=chunks.chunk_size_includes_metadata,
-    )
+        output = None
+
+    else:
+        output = create_base_text_units(
+            documents,
+            context.callbacks,
+            chunks.group_by_columns,
+            chunks.size,
+            chunks.overlap,
+            chunks.encoding_model,
+            strategy=chunks.strategy,
+            prepend_metadata=chunks.prepend_metadata,
+            chunk_size_includes_metadata=chunks.chunk_size_includes_metadata,
+        )
     print("###HERE###")
     print(output.columns)
     print(output.head())
@@ -55,6 +59,20 @@ async def run_workflow(
     return WorkflowFunctionOutput(result=output)
 
 
+def create_base_image_units(
+        documents: pd.DataFrame,
+) -> pd.DataFrame:
+    
+    # Create a new dataframe with the required columns
+    output = pd.DataFrame({
+        "id": documents["id"],
+        "text": documents["text"],
+        "document_ids": documents["id"],  # document_ids is same as id
+        "n_tokens": documents["text"].str.len(),  # n_tokens is length of text
+        "doc_type": documents["doc_type"]  # keep doc_type column
+    })
+    
+    return output
 
 def create_base_text_units(
     documents: pd.DataFrame,
