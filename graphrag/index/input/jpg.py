@@ -67,6 +67,7 @@ async def load_jpg(
         new_item["id"] = gen_sha512_hash(new_item, ["text", "image_width", "image_height"])
         new_item["title"] = str(Path(path).name)
         new_item["creation_date"] = await storage.get_creation_date(path)
+        new_item["doc_type"] = "jpeg" ## FIGURE OUT WHERE THIS GOES
 
         print(new_item)
         

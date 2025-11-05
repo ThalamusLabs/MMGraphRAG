@@ -51,8 +51,13 @@ async def extract_graph(
         nonlocal num_started
         text = row[text_column]
         id = row[id_column]
+        try:
+            doc_type = row['doc_type']
+        except:
+            doc_type = 'default'
+            
         result = await strategy_exec(
-            [Document(text=text, id=id)],
+            [Document(text=text, id=id, doc_type=doc_type)],
             entity_types,
             cache,
             strategy_config,
