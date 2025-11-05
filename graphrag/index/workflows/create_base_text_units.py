@@ -53,9 +53,7 @@ async def run_workflow(
     logger.info("Workflow completed: create_base_text_units")
     return WorkflowFunctionOutput(result=output)
 
-def create_base_image_unit(
-    image_docs
-)
+
 
 def create_base_text_units(
     documents: pd.DataFrame,
