@@ -24,6 +24,7 @@ class Document:
 
     text: str
     id: str
+    doc_type: str
 
 
 @dataclass
