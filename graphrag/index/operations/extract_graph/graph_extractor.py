@@ -152,10 +152,10 @@ class GraphExtractor:
             prompt = json.dumps( {"content":[
                 {
                     "type": "text",
-                    "text": self._extraction_prompt.format(**{
-                    **prompt_variables,
-                    self._input_text_key: "Give an entity as described to the image",
-                }),
+                     "text": "Describe the Image "#self._extraction_prompt.format(**{
+                #     **prompt_variables,
+                #     self._input_text_key: "Give an entity to the image",
+                # }),
                 },
                 {
                     "type": "image_url",
