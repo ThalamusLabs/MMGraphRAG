@@ -32,6 +32,7 @@ async def run_workflow(
 
     chunks = config.chunks
 
+
     output = create_base_text_units(
         documents,
         context.callbacks,
@@ -43,6 +44,7 @@ async def run_workflow(
         prepend_metadata=chunks.prepend_metadata,
         chunk_size_includes_metadata=chunks.chunk_size_includes_metadata,
     )
+    print("###HERE###")
     print(output.columns)
     print(output.head())
 
@@ -51,6 +53,9 @@ async def run_workflow(
     logger.info("Workflow completed: create_base_text_units")
     return WorkflowFunctionOutput(result=output)
 
+def create_base_image_unit(
+    image_docs
+)
 
 def create_base_text_units(
     documents: pd.DataFrame,
