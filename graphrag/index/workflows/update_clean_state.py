@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 
 from graphrag.config.models.graph_rag_config import GraphRagConfig
@@ -12,6 +13,7 @@ from graphrag.index.typing.workflow import WorkflowFunctionOutput
 logger = logging.getLogger(__name__)
 
 
+@weave.op
 async def run_workflow(  # noqa: RUF029
     _config: GraphRagConfig,
     context: PipelineRunContext,

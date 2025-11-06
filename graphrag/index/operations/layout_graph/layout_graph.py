@@ -3,6 +3,7 @@
 
 """A module containing layout_graph, _run_layout and _apply_layout_to_graph methods definition."""
 
+import weave
 import logging
 
 import networkx as nx
@@ -14,6 +15,7 @@ from graphrag.index.operations.layout_graph.typing import GraphLayout
 logger = logging.getLogger(__name__)
 
 
+@weave.op
 def layout_graph(
     graph: nx.Graph,
     enabled: bool,

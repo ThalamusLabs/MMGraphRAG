@@ -3,6 +3,7 @@
 
 """A module containing the extract_covariates verb definition."""
 
+import weave
 import logging
 from collections.abc import Iterable
 from dataclasses import asdict
@@ -29,6 +30,7 @@ logger = logging.getLogger(__name__)
 DEFAULT_ENTITY_TYPES = ["organization", "person", "geo", "event"]
 
 
+@weave.op
 async def extract_covariates(
     input: pd.DataFrame,
     callbacks: WorkflowCallbacks,

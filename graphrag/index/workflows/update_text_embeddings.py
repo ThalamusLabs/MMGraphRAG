@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 
 from graphrag.config.get_embedding_settings import get_embedding_settings
@@ -15,7 +16,7 @@ from graphrag.utils.storage import write_table_to_storage
 
 logger = logging.getLogger(__name__)
 
-
+@weave.op(name="Update Text Embeddings")
 async def run_workflow(
     config: GraphRagConfig,
     context: PipelineRunContext,

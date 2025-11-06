@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 from typing import Any
 from uuid import uuid4
@@ -61,6 +62,7 @@ async def run_workflow(
     return WorkflowFunctionOutput(result=output)
 
 
+@weave.op
 async def extract_covariates(
     text_units: pd.DataFrame,
     callbacks: WorkflowCallbacks,

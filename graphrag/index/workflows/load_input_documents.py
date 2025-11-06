@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 
 import pandas as pd
@@ -19,25 +20,26 @@ logger = logging.getLogger(__name__)
 
 
 async def run_workflow(
-    config: GraphRagConfig,
-    context: PipelineRunContext,
+	config: GraphRagConfig,
+	context: PipelineRunContext,
 ) -> WorkflowFunctionOutput:
-    """Load and parse input documents into a standard format."""
-    output = await load_input_documents(
-        config.input,
-        context.input_storage,
-    )
+	"""Load and parse input documents into a standard format."""
+	output = await load_input_documents(
+		config.input,
+		context.input_storage,
+	)
 
-    logger.info("Final # of rows loaded: %s", len(output))
-    context.stats.num_documents = len(output)
+	logger.info("Final # of rows loaded: %s", len(output))
+	context.stats.num_documents = len(output)
 
-    await write_table_to_storage(output, "documents", context.output_storage)
+	await write_table_to_storage(output, "documents", context.output_storage)
 
-    return WorkflowFunctionOutput(result=output)
+	return WorkflowFunctionOutput(result=output)
 
 
+@weave.op
 async def load_input_documents(
-    config: InputConfig, storage: PipelineStorage
+	config: InputConfig, storage: PipelineStorage
 ) -> pd.DataFrame:
-    """Load and parse input documents into a standard format."""
-    return await create_input(config, storage)
+	"""Load and parse input documents into a standard format."""
+	return await create_input(config, storage)

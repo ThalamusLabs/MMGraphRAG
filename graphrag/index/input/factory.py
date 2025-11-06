@@ -3,6 +3,7 @@
 
 """A module containing create_input method definition."""
 
+import weave
 import logging
 from collections.abc import Awaitable, Callable
 from typing import cast
@@ -26,6 +27,7 @@ loaders: dict[str, Callable[..., Awaitable[pd.DataFrame]]] = {
 }
 
 
+@weave.op
 async def create_input(
     config: InputConfig,
     storage: PipelineStorage,

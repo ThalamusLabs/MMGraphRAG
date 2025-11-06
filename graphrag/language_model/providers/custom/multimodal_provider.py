@@ -4,6 +4,7 @@
 """A module containing multimodal model provider definitions."""
 
 from __future__ import annotations
+import weave
 
 import os
 from typing import TYPE_CHECKING, Any
@@ -124,6 +125,8 @@ class MultiModalChatLLM:
 
         return messages
 
+
+    @weave.op
     async def achat(
         self,
         prompt: str,

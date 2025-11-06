@@ -29,14 +29,21 @@ class ConsoleWorkflowCallbacks(NoopWorkflowCallbacks):
 
     def workflow_start(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow starts."""
-        print(f"Starting workflow: {name}")
+        print("")  # account for potential return on prior progress
+        print("=============================================")
+        print(f"=\t START workflow: {name}")
+        print("=============================================")
+        print("")  # account for potential return on prior progress
 
     def workflow_end(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow ends."""
         print("")  # account for potential return on prior progress
-        print(f"Workflow complete: {name}")
-        if self._verbose:
-            print(instance)
+        print("=============================================")
+        print(f"=\t END Workflow: {name}")
+        print("=============================================")
+        print("")  # account for potential return on prior progress
+        # if self._verbose:
+        #     print(instance)
 
     def progress(self, progress: Progress) -> None:
         """Handle when progress occurs."""

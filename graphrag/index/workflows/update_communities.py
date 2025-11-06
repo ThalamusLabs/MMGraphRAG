@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 
 from graphrag.config.models.graph_rag_config import GraphRagConfig
@@ -36,6 +37,7 @@ async def run_workflow(
     return WorkflowFunctionOutput(result=None)
 
 
+@weave.op
 async def _update_communities(
     previous_storage: PipelineStorage,
     delta_storage: PipelineStorage,

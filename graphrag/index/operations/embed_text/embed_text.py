@@ -3,6 +3,7 @@
 
 """A module containing embed_text, load_strategy and create_row_from_embedding_data methods definition."""
 
+import weave
 import logging
 from enum import Enum
 from typing import Any
@@ -36,6 +37,7 @@ class TextEmbedStrategyType(str, Enum):
         return f'"{self.value}"'
 
 
+@weave.op
 async def embed_text(
     input: pd.DataFrame,
     callbacks: WorkflowCallbacks,

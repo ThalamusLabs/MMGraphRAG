@@ -2,7 +2,7 @@
 # Licensed under the MIT License
 
 """A module containing entity_extract methods."""
-
+import weave
 import logging
 from typing import Any
 
@@ -24,6 +24,7 @@ logger = logging.getLogger(__name__)
 DEFAULT_ENTITY_TYPES = ["organization", "person", "geo", "event"]
 
 
+@weave.op
 async def extract_graph(
     text_units: pd.DataFrame,
     callbacks: WorkflowCallbacks,

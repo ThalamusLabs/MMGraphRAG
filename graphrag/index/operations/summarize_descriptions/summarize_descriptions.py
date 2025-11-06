@@ -3,6 +3,7 @@
 
 """A module containing the summarize_descriptions verb."""
 
+import weave
 import asyncio
 import logging
 from typing import Any
@@ -20,6 +21,7 @@ from graphrag.logger.progress import ProgressTicker, progress_ticker
 logger = logging.getLogger(__name__)
 
 
+@weave.op
 async def summarize_descriptions(
     entities_df: pd.DataFrame,
     relationships_df: pd.DataFrame,

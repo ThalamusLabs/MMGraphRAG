@@ -76,6 +76,8 @@ async def build_index(
 
     workflow_callbacks.pipeline_start(pipeline.names())
 
+    print(f"Workflows: {[x for x in pipeline.workflows]}")
+
     async for output in run_pipeline(
         pipeline,
         config,

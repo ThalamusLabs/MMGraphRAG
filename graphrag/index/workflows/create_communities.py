@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 from datetime import datetime, timezone
 from typing import cast
@@ -51,6 +52,7 @@ async def run_workflow(
     return WorkflowFunctionOutput(result=output)
 
 
+@weave.op
 def create_communities(
     entities: pd.DataFrame,
     relationships: pd.DataFrame,

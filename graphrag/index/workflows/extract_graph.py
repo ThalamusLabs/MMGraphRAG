@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 from typing import Any
 
@@ -79,6 +80,7 @@ async def run_workflow(
     )
 
 
+@weave.op
 async def extract_graph(
     text_units: pd.DataFrame,
     callbacks: WorkflowCallbacks,

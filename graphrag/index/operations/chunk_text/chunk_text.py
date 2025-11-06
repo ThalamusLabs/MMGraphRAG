@@ -3,6 +3,7 @@
 
 """A module containing _get_num_total, chunk, run_strategy and load_strategy methods definitions."""
 
+import weave
 from typing import Any, cast
 
 import pandas as pd
@@ -16,6 +17,7 @@ from graphrag.index.operations.chunk_text.typing import (
 from graphrag.logger.progress import ProgressTicker, progress_ticker
 
 
+@weave.op
 def chunk_text(
     input: pd.DataFrame,
     column: str,

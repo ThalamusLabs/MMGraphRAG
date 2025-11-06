@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 
 import pandas as pd
@@ -93,6 +94,7 @@ async def run_workflow(
     return WorkflowFunctionOutput(result=output)
 
 
+@weave.op
 async def generate_text_embeddings(
     documents: pd.DataFrame | None,
     relationships: pd.DataFrame | None,

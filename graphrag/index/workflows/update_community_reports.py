@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 
 import pandas as pd
@@ -42,6 +43,7 @@ async def run_workflow(
     return WorkflowFunctionOutput(result=None)
 
 
+@weave.op
 async def _update_community_reports(
     previous_storage: PipelineStorage,
     delta_storage: PipelineStorage,

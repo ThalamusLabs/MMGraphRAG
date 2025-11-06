@@ -3,6 +3,7 @@
 
 """CLI implementation of the index subcommand."""
 
+import weave
 import asyncio
 import logging
 import sys
@@ -22,6 +23,10 @@ warnings.filterwarnings("ignore", message=".*NumbaDeprecationWarning.*")
 logger = logging.getLogger(__name__)
 
 
+# Setup WB Weave
+weave.init("brandsma-personal/MMGraphRAG")
+
+
 def _register_signal_handlers():
     import signal
 
@@ -39,6 +44,7 @@ def _register_signal_handlers():
         signal.signal(signal.SIGHUP, handle_signal)
 
 
+@weave.op(name="Index CLI")
 def index_cli(
     root_dir: Path,
     method: IndexingMethod,

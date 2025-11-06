@@ -3,6 +3,7 @@
 
 """A module containing create_community_reports and load_strategy methods definition."""
 
+import weave
 import logging
 from collections.abc import Callable
 
@@ -28,6 +29,7 @@ from graphrag.tokenizer.tokenizer import Tokenizer
 logger = logging.getLogger(__name__)
 
 
+@weave.op
 async def summarize_communities(
     nodes: pd.DataFrame,
     communities: pd.DataFrame,

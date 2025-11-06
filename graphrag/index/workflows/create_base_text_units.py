@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import json
 import logging
 from typing import Any, cast
@@ -20,7 +21,6 @@ from graphrag.index.utils.hashing import gen_sha512_hash
 from graphrag.utils.storage import load_table_from_storage, write_table_to_storage
 
 logger = logging.getLogger(__name__)
-
 
 async def run_workflow(
     config: GraphRagConfig,
@@ -52,6 +52,7 @@ async def run_workflow(
     return WorkflowFunctionOutput(result=output)
 
 
+@weave.op
 def create_base_text_units(
     documents: pd.DataFrame,
     callbacks: WorkflowCallbacks,

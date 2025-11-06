@@ -3,6 +3,7 @@
 
 """Graph extraction using NLP."""
 
+import weave
 from itertools import combinations
 
 import numpy as np
@@ -19,6 +20,7 @@ from graphrag.index.utils.graphs import calculate_pmi_edge_weights
 from graphrag.index.utils.hashing import gen_sha512_hash
 
 
+@weave.op
 async def build_noun_graph(
     text_unit_df: pd.DataFrame,
     text_analyzer: BaseNounPhraseExtractor,

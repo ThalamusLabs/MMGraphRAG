@@ -3,6 +3,7 @@
 
 """A module containing embed_graph and run_embeddings methods definition."""
 
+import weave
 import networkx as nx
 
 from graphrag.config.models.embed_graph_config import EmbedGraphConfig
@@ -13,6 +14,7 @@ from graphrag.index.operations.embed_graph.typing import (
 from graphrag.index.utils.stable_lcc import stable_largest_connected_component
 
 
+@weave.op
 def embed_graph(
     graph: nx.Graph,
     config: EmbedGraphConfig,

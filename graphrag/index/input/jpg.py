@@ -25,7 +25,7 @@ async def load_jpg(
 ) -> pd.DataFrame:
     """Load JPG image inputs from a directory."""
     logger.info("Loading jpg files from %s", config.storage.base_dir)
-    print(f"Loading jpg files from {config.storage.base_dir}")
+    # print(f"Loading jpg files from {config.storage.base_dir}")
     async def load_file(path: str, group: dict | None = None) -> pd.DataFrame:
         if group is None:
             group = {}
@@ -68,7 +68,7 @@ async def load_jpg(
         new_item["title"] = str(Path(path).name)
         new_item["creation_date"] = await storage.get_creation_date(path)
 
-        print(new_item)
+        # print(new_item)
         
         return pd.DataFrame([new_item])
 

@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 
 import pandas as pd
@@ -50,6 +51,7 @@ async def run_workflow(
     )
 
 
+@weave.op
 def prune_graph(
     entities: pd.DataFrame,
     relationships: pd.DataFrame,

@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 
 from graphrag.config.models.graph_rag_config import GraphRagConfig
@@ -14,6 +15,7 @@ from graphrag.index.update.incremental_index import concat_dataframes
 logger = logging.getLogger(__name__)
 
 
+@weave.op(name="Update Final Documents")
 async def run_workflow(
     config: GraphRagConfig,
     context: PipelineRunContext,

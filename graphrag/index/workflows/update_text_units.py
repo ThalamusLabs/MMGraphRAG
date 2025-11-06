@@ -3,6 +3,7 @@
 
 """A module containing run_workflow method definition."""
 
+import weave
 import logging
 
 import numpy as np
@@ -39,6 +40,7 @@ async def run_workflow(
     return WorkflowFunctionOutput(result=None)
 
 
+@weave.op
 async def _update_text_units(
     previous_storage: PipelineStorage,
     delta_storage: PipelineStorage,
