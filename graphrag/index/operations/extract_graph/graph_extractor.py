@@ -147,25 +147,39 @@ class GraphExtractor:
 
         print(doc.doc_type)
         if doc.doc_type == "jpeg":
-            import json
-            print("running IMAGE")
-            print(doc.text)
-            prompt = json.dumps( {"content":[
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{doc.text}"
-                    }
-                }
-            ]})
+            # import json
+            # prompt = {"content":[
+            #     {
+            #         "type": "text",
+            #         "text": "Analyze the following image. Describe all the entities that are present in the image. For all entities, also describe the relationships that are present between entities. Do not make up entities or relationships. Make sure that the entities and relationships you find in the image are actually there. Finally, describe each entity and relationship in detail.",
+            #     },
+            #     {
+            #         "type": "image_url",
+            #         "image_url": {
+            #             "url": f"data:image/jpeg;base64,{doc.text}"
+            #         }
+            #     }
+            # ]}
             response = await self._model.achat(
-                prompt=prompt
+                # prompt=prompt,
+                prompt=doc.text,
+                is_image=True,
             )
+            print(response.output.content)
         else:
             response = await self._model.achat(
                 self._extraction_prompt.format(**{
                     **prompt_variables,
                     self._input_text_key: doc.text,
+                }),
+            )
+        
+        if doc.doc_type == "jpeg" and not (response.output.content is None or response.output.content.strip() == ""):
+            # If the response is not empty, process it again with the textual description of the image
+            response = await self._model.achat(
+                self._extraction_prompt.format(**{
+                    **prompt_variables,
+                    self._input_text_key: response.output.content,
                 }),
             )
 

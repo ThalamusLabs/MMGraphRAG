@@ -22,7 +22,16 @@ def finalize_entities(
     layout_enabled: bool = False,
 ) -> pd.DataFrame:
     """All the steps to transform final entities."""
-    graph = create_graph(relationships, edge_attr=["weight"])
+
+    edge_attrs = []
+    if 'weight' in relationships.columns:
+        edge_attrs.append('weight')
+    else:
+        # Optionally add a default weight column
+        relationships['weight'] = 1.0
+        edge_attrs.append('weight')
+
+    graph = create_graph(relationships, edge_attr=edge_attrs)
     graph_embeddings = None
     if embed_config is not None and embed_config.enabled:
         graph_embeddings = embed_graph(

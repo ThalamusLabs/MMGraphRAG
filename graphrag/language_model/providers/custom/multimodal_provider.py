@@ -83,9 +83,13 @@ class MultiModalChatLLM:
         if not is_image:
             # Simple text message
             return text
-        
+
         # Multimodal message with image
         return [
+            {
+                "type": "text",
+                "text": "Analyze the following image. Describe all the entities that are present in the image. For all entities, also describe the relationships that are present between entities. Do not make up entities or relationships. Make sure that the entities and relationships you find in the image are actually there. Finally, describe each entity and relationship in detail. Do not provide a summary, only a simple bullet pointed list of the entities and relationships, with their descriptions.",
+            },
             {
                 "type": "image_url",
                 "image_url": {
@@ -125,11 +129,10 @@ class MultiModalChatLLM:
 
         return messages
 
-
     @weave.op
     async def achat(
         self,
-        prompt: str,
+        prompt: str | dict[str, Any],
         history: list[dict[str, Any]] | None = None,
         is_image: bool = False,
         **kwargs,
@@ -148,7 +151,6 @@ class MultiModalChatLLM:
         messages = self._build_messages(prompt, history, is_image)
 
         try:
-            print(messages)
             # Make API request using OpenAI SDK
             response = await self.async_client.chat.completions.create(
                 model=self.config.deployment_name,
