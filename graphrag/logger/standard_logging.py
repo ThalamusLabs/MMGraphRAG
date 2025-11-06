@@ -79,5 +79,16 @@ def init_loggers(
     config_dict = reporting_config.model_dump()
     args = {**config_dict, "root_dir": config.root_dir, "filename": filename}
 
+    # Add file handler (logs all levels)
     handler = LoggerFactory.create_logger(reporting_config.type, args)
     logger.addHandler(handler)
+
+    # Add stdout handler for ERROR and above
+    stdout_handler = logging.StreamHandler()
+    stdout_handler.setLevel(logging.ERROR)
+    formatter = logging.Formatter(
+        fmt="%(asctime)s.%(msecs)04d - %(levelname)s - %(name)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
+    stdout_handler.setFormatter(formatter)
+    logger.addHandler(stdout_handler)
