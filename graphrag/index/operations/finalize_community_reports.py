@@ -16,7 +16,10 @@ def finalize_community_reports(
 ) -> pd.DataFrame:
     """All the steps to transform final community reports."""
     # Merge with communities to add shared fields
-    print(reports.head())
+    # If community column does not exist, create it with a default value "Generic Community"
+    # if "community" not in reports.columns:
+    #     reports["community"] = "Generic Community"
+
     community_reports = reports.merge(
         communities.loc[:, ["community", "parent", "children", "size", "period"]],
         on="community",
