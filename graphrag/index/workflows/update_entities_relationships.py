@@ -66,7 +66,7 @@ async def _update_entities_and_relationships(
     """Update Final Entities  and Relationships output."""
     old_entities = await load_table_from_storage("entities", previous_storage)
     delta_entities = await load_table_from_storage("entities", delta_storage)
-
+    
     merged_entities_df, entity_id_mapping = _group_and_resolve_entities(
         old_entities, delta_entities
     )

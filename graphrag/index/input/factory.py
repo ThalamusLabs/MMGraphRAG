@@ -13,9 +13,9 @@ import pandas as pd
 from graphrag.config.enums import InputFileType
 from graphrag.config.models.input_config import InputConfig
 from graphrag.index.input.csv import load_csv
+from graphrag.index.input.jpg import load_jpg
 from graphrag.index.input.json import load_json
 from graphrag.index.input.text import load_text
-from graphrag.index.input.jpg import load_jpg
 from graphrag.storage.pipeline_storage import PipelineStorage
 
 logger = logging.getLogger(__name__)
@@ -53,7 +53,7 @@ async def create_input(
                 raise ValueError(value_error_msg)
 
             result[config.metadata] = result[config.metadata].astype(str)
-
+            print("create_input: ",result)
         return cast("pd.DataFrame", result)
 
     msg = f"Unknown input type {config.file_type}"

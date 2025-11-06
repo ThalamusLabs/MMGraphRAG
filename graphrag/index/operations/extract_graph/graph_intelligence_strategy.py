@@ -68,7 +68,7 @@ async def run_extract_graph(
     text_list = [doc.text.strip() for doc in docs]
 
     results = await extractor(
-        list(text_list),
+        docs,
         {
             "entity_types": entity_types,
             "tuple_delimiter": tuple_delimiter,

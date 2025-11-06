@@ -94,6 +94,7 @@ async def extract_graph(
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """All the steps to create the base entity graph."""
     # this returns a graph for each text unit, to be merged later
+    
     extracted_entities, extracted_relationships = await extractor(
         text_units=text_units,
         callbacks=callbacks,

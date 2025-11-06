@@ -13,6 +13,7 @@ from typing import Any
 import networkx as nx
 
 from graphrag.config.defaults import graphrag_config_defaults
+from graphrag.index.operations.extract_graph.typing import Document
 from graphrag.index.typing.error_handler import ErrorHandlerFn
 from graphrag.index.utils.string import clean_str
 from graphrag.language_model.protocol.base import ChatModel
@@ -88,7 +89,7 @@ class GraphExtractor:
         self._on_error = on_error or (lambda _e, _s, _d: None)
 
     async def __call__(
-        self, texts: list[str], prompt_variables: dict[str, Any] | None = None
+        self, docs: list[Document], prompt_variables: dict[str, Any] | None = None
     ) -> GraphExtractionResult:
         """Call method definition."""
         if prompt_variables is None:
@@ -112,11 +113,11 @@ class GraphExtractor:
             ),
         }
 
-        for doc_index, text in enumerate(texts):
+        for doc_index, doc in enumerate(docs):
             try:
                 # Invoke the entity extraction
-                result = await self._process_document(text, prompt_variables)
-                source_doc_map[doc_index] = text
+                result = await self._process_document(doc, prompt_variables)
+                source_doc_map[doc_index] = doc.text
                 all_records[doc_index] = result
             except Exception as e:
                 logger.exception("error extracting graph")
@@ -125,7 +126,7 @@ class GraphExtractor:
                     traceback.format_exc(),
                     {
                         "doc_index": doc_index,
-                        "text": text,
+                        "text": doc.text,
                     },
                 )
 
@@ -141,14 +142,34 @@ class GraphExtractor:
         )
 
     async def _process_document(
-        self, text: str, prompt_variables: dict[str, str]
+        self, doc: Document, prompt_variables: dict[str, str]
     ) -> str:
-        response = await self._model.achat(
-            self._extraction_prompt.format(**{
-                **prompt_variables,
-                self._input_text_key: text,
-            }),
-        )
+
+        print(doc.doc_type)
+        if doc.doc_type == "jpeg":
+            import json
+            print("running IMAGE")
+            print(doc.text)
+            prompt = json.dumps( {"content":[
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:image/jpeg;base64,{doc.text}"
+                    }
+                }
+            ]})
+            response = await self._model.achat(
+                prompt=prompt
+            )
+        else:
+            response = await self._model.achat(
+                self._extraction_prompt.format(**{
+                    **prompt_variables,
+                    self._input_text_key: doc.text,
+                }),
+            )
+
+        
         results = response.output.content or ""
 
         # if gleanings are specified, enter a loop to extract more entities

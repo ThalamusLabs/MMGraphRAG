@@ -32,25 +32,45 @@ async def run_workflow(
 
     chunks = config.chunks
 
-    output = create_base_text_units(
-        documents,
-        context.callbacks,
-        chunks.group_by_columns,
-        chunks.size,
-        chunks.overlap,
-        chunks.encoding_model,
-        strategy=chunks.strategy,
-        prepend_metadata=chunks.prepend_metadata,
-        chunk_size_includes_metadata=chunks.chunk_size_includes_metadata,
-    )
-    print(output.columns)
-    print(output.head())
+    print(documents.columns)
+    if  documents["doc_type"].iloc[0] == "jpeg":
+
+        output = create_base_image_units(documents=documents)
+
+    else:
+        output = create_base_text_units(
+            documents,
+            context.callbacks,
+            chunks.group_by_columns,
+            chunks.size,
+            chunks.overlap,
+            chunks.encoding_model,
+            strategy=chunks.strategy,
+            prepend_metadata=chunks.prepend_metadata,
+            chunk_size_includes_metadata=chunks.chunk_size_includes_metadata,
+        )
 
     await write_table_to_storage(output, "text_units", context.output_storage)
 
     logger.info("Workflow completed: create_base_text_units")
     return WorkflowFunctionOutput(result=output)
 
+
+@weave.op
+def create_base_image_units(
+        documents: pd.DataFrame,
+) -> pd.DataFrame:
+    
+    # Create a new dataframe with the required columns
+    output = pd.DataFrame({
+        "id": documents["id"],
+        "text": documents["text"],
+        "document_ids": documents["id"],  # document_ids is same as id
+        "n_tokens": documents["text"].str.len(),  # n_tokens is length of text
+        "doc_type": documents["doc_type"]  # keep doc_type column
+    })
+    
+    return output
 
 @weave.op
 def create_base_text_units(
