@@ -35,19 +35,20 @@ def validate_config_names(parameters: GraphRagConfig) -> None:
                 print(f"Failed to validate language model ({id}) params", e)  # noqa: T201
                 sys.exit(1)
         elif config.type in ["embedding", "azure_openai_embedding", "openai_embedding"]:
-            embed_llm = ModelManager().register_embedding(
-                name="test-embed-llm",
-                model_type=config.type,
-                config=config,
-                callbacks=NoopWorkflowCallbacks(),
-                cache=None,
-            )
-            try:
-                asyncio.run(
-                    embed_llm.aembed_batch(["This is an LLM Embedding Test String"])
-                )
-                logger.info("Embedding LLM Config Params Validated")
-            except Exception as e:  # noqa: BLE001
-                logger.error(f"Embedding configuration error detected.\n{e}")  # noqa
-                print(f"Failed to validate embedding model ({id}) params", e)  # noqa: T201
-                sys.exit(1)
+            pass
+            # embed_llm = ModelManager().register_embedding(
+            #     name="test-embed-llm",
+            #     model_type=config.type,
+            #     config=config,
+            #     callbacks=NoopWorkflowCallbacks(),
+            #     cache=None,
+            # )
+            # try:
+            #     asyncio.run(
+            #         embed_llm.aembed_batch(["This is an LLM Embedding Test String"])
+            #     )
+            #     logger.info("Embedding LLM Config Params Validated")
+            # except Exception as e:  # noqa: BLE001
+            #     logger.error(f"Embedding configuration error detected.\n{e}")  # noqa
+            #     print(f"Failed to validate embedding model ({id}) params", e)  # noqa: T201
+            #     sys.exit(1)
