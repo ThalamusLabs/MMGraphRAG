@@ -74,7 +74,7 @@ async def run_workflow(
     print("Entities columns:", entities.columns)  # noqa: T201
     for _, row in entities.head(2).iterrows():
         print(
-            f"Entity: {row['title']}\nDescription: {row['description']}\nText Unit IDs: {row['text_unit_ids']}\n"
+            f"Entity: {row['title']} (Entity Type: {row['type']})\nDescription: {row['description']}\nText Unit IDs: {row['text_unit_ids']}\n"
         )  # noqa: T201
     
     
