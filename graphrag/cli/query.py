@@ -74,7 +74,7 @@ def run_global_search(
                 verbose=verbose,
             )
         )
-        print(response)
+        # print(response)
         return response, context_data
 
     # Otherwise, call the Single-Index Global Search API
@@ -108,9 +108,9 @@ def run_global_search(
                 verbose=verbose,
             ):
                 full_response += stream_chunk
-                print(stream_chunk, end="")
+                # print(stream_chunk, end="")
                 sys.stdout.flush()
-            print()
+            # print()
             return full_response, context_data
 
         return asyncio.run(run_streaming_search())
@@ -128,7 +128,7 @@ def run_global_search(
             verbose=verbose,
         )
     )
-    print(response)
+    # print(response)
 
     return response, context_data
 
@@ -198,7 +198,7 @@ def run_local_search(
                 verbose=verbose,
             )
         )
-        print(response)
+        # print(response)
 
         return response, context_data
 
@@ -238,9 +238,9 @@ def run_local_search(
                 verbose=verbose,
             ):
                 full_response += stream_chunk
-                print(stream_chunk, end="")
+                # print(stream_chunk, end="")
                 sys.stdout.flush()
-            print()
+            # print()
             return full_response, context_data
 
         return asyncio.run(run_streaming_search())
@@ -260,7 +260,7 @@ def run_local_search(
             verbose=verbose,
         )
     )
-    print(response)
+    # print(response)
 
     return response, context_data
 
@@ -321,7 +321,7 @@ def run_drift_search(
                 verbose=verbose,
             )
         )
-        print(response)
+        # print(response)
 
         return response, context_data
 
@@ -359,9 +359,9 @@ def run_drift_search(
                 verbose=verbose,
             ):
                 full_response += stream_chunk
-                print(stream_chunk, end="")
+                # print(stream_chunk, end="")
                 sys.stdout.flush()
-            print()
+            # print()
             return full_response, context_data
 
         return asyncio.run(run_streaming_search())
@@ -381,7 +381,7 @@ def run_drift_search(
             verbose=verbose,
         )
     )
-    print(response)
+    # print(response)
 
     return response, context_data
 
@@ -426,7 +426,7 @@ def run_basic_search(
                 verbose=verbose,
             )
         )
-        print(response)
+        # print(response)
 
         return response, context_data
 
@@ -454,9 +454,9 @@ def run_basic_search(
                 verbose=verbose,
             ):
                 full_response += stream_chunk
-                print(stream_chunk, end="")
+                # print(stream_chunk, end="")
                 sys.stdout.flush()
-            print()
+            # print()
             return full_response, context_data
 
         return asyncio.run(run_streaming_search())
@@ -469,7 +469,7 @@ def run_basic_search(
             verbose=verbose,
         )
     )
-    print(response)
+    # print(response)
 
     return response, context_data
 

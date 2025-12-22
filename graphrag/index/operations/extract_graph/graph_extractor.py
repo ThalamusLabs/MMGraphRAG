@@ -145,7 +145,7 @@ class GraphExtractor:
         self, doc: Document, prompt_variables: dict[str, str]
     ) -> str:
 
-        print(doc.doc_type)
+        # print(doc.doc_type)
         if doc.doc_type == "jpeg":
             # import json
             # prompt = {"content":[
@@ -165,7 +165,16 @@ class GraphExtractor:
                 prompt=doc.text,
                 is_image=True,
             )
-            print(response.output.content)
+            print("Image analysis response:", response.output.content)
+            print("---------------")
+            print("---------------")
+            print("---------------")
+            print("---------------")
+            print("---------------")
+            print("---------------")
+            print("---------------")
+            print("---------------")
+            print("---------------")
         else:
             response = await self._model.achat(
                 self._extraction_prompt.format(**{

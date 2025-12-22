@@ -76,7 +76,7 @@ async def build_index(
 
     workflow_callbacks.pipeline_start(pipeline.names())
 
-    print(f"Workflows: {[x for x in pipeline.workflows]}")
+    print(f"Workflows: {[x[0] for x in pipeline.workflows]}")
 
     async for output in run_pipeline(
         pipeline,
@@ -87,8 +87,8 @@ async def build_index(
         input_documents=input_documents,
     ):
         outputs.append(output)
-        print(len(outputs))
-        print(outputs)
+
+
         if output.errors and len(output.errors) > 0:
             logger.error("Workflow %s completed with errors", output.workflow)
         else:

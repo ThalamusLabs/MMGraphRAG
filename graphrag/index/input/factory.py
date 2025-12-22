@@ -53,7 +53,7 @@ async def create_input(
                 raise ValueError(value_error_msg)
 
             result[config.metadata] = result[config.metadata].astype(str)
-            print("create_input: ",result)
+            # print("create_input: ",result)
         return cast("pd.DataFrame", result)
 
     msg = f"Unknown input type {config.file_type}"

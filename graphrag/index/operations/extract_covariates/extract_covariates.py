@@ -75,6 +75,8 @@ async def extract_covariates(
         num_threads=num_threads,
         progress_msg="extract covariates progress: ",
     )
+
+    
     return pd.DataFrame([item for row in results for item in row or []])
 
 

@@ -122,6 +122,8 @@ async def create_community_reports(
         max_input_length,
     )
 
+    print(len(communities), "communities to summarize")
+
     community_reports = await summarize_communities(
         nodes,
         communities,
@@ -135,8 +137,9 @@ async def create_community_reports(
         async_mode=async_mode,
         num_threads=num_threads,
     )
-    print(community_reports.head())
+    # print(community_reports.head())
     print(community_reports.columns)
+    print("Created community reports:", len(community_reports))
     exit()
 
     return finalize_community_reports(community_reports, communities)

@@ -56,6 +56,9 @@ async def run_workflow(
             num_threads=num_threads,
         )
 
+        print(output.columns)
+        print("Extracted covariates:", len(output))
+
         await write_table_to_storage(output, "covariates", context.output_storage)
 
     logger.info("Workflow completed: extract_covariates")

@@ -31,6 +31,7 @@ class ConsoleWorkflowCallbacks(NoopWorkflowCallbacks):
         """Execute this callback when a workflow starts."""
         print("")  # account for potential return on prior progress
         print("=============================================")
+        print("=============================================")
         print(f"=\t START workflow: {name}")
         print("=============================================")
         print("")  # account for potential return on prior progress
@@ -38,9 +39,10 @@ class ConsoleWorkflowCallbacks(NoopWorkflowCallbacks):
     def workflow_end(self, name: str, instance: object) -> None:
         """Execute this callback when a workflow ends."""
         print("")  # account for potential return on prior progress
-        print("=============================================")
-        print(f"=\t END Workflow: {name}")
-        print("=============================================")
+        print("*********************************************")
+        print(f"*\t END Workflow: {name}")
+        print("*********************************************")
+        print("*********************************************")
         print("")  # account for potential return on prior progress
         # if self._verbose:
         #     print(instance)

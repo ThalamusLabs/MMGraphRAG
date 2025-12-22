@@ -31,7 +31,6 @@ async def run_workflow(
     context: PipelineRunContext,
 ) -> WorkflowFunctionOutput:
     """All the steps to create the base entity graph."""
-    logger.info("Workflow started: extract_graph")
     text_units = await load_table_from_storage("text_units", context.output_storage)
 
     extract_graph_llm_settings = config.get_language_model_config(
@@ -71,7 +70,20 @@ async def run_workflow(
             raw_relationships, "raw_relationships", context.output_storage
         )
 
-    logger.info("Workflow completed: extract_graph")
+    # Show a few examples nicely formatted with 'title', description and text_unit_ids columns
+    print("Entities columns:", entities.columns)  # noqa: T201
+    for _, row in entities.head(2).iterrows():
+        print(
+            f"Entity: {row['title']}\nDescription: {row['description']}\nText Unit IDs: {row['text_unit_ids']}\n"
+        )  # noqa: T201
+    
+    
+    print("Relationships columns:", relationships.columns)  # noqa: T201
+    for _, row in relationships.head(2).iterrows():
+        print(
+            f"Relationship: {row['source']} -> {row['target']}\nDescription: {row['description']}\nText Unit IDs: {row['text_unit_ids']}\n"
+        )  # noqa: T201
+
     return WorkflowFunctionOutput(
         result={
             "entities": entities,

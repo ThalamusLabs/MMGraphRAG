@@ -82,6 +82,12 @@ async def run_workflow(
         embedded_fields=embedded_fields,
     )
 
+    print("Generated embeddings for the following fields:", list(output.keys()))
+    print("Number of embeddings generated for each field:", {k: len(v) for k, v in output.items()})
+
+    print(output.columns)
+    exit()
+
     if config.snapshots.embeddings:
         for name, table in output.items():
             await write_table_to_storage(

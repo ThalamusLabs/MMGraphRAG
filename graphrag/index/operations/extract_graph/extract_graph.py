@@ -37,7 +37,6 @@ async def extract_graph(
     num_threads: int = 4,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Extract a graph from a piece of text using a language model."""
-    print("$$$$$$ HERE IN EXTRACT_GRAPH $$$$$$$$")
     logger.debug("entity_extract strategy=%s", strategy)
     if entity_types is None:
         entity_types = DEFAULT_ENTITY_TYPES
@@ -64,11 +63,11 @@ async def extract_graph(
             cache,
             strategy_config,
         )
-        print(f"Result: {result}")  # --- IGNORE ---
+        # print(f"Result: {result}")  # --- IGNORE ---
         num_started += 1
         return [result.entities, result.relationships, result.graph]
-    print(f"Starting extraction for {len(text_units)} text units")
-    print(text_units)
+    # print(f"Starting extraction for {len(text_units)} text units")
+    # print(text_units)
     results = await derive_from_rows(
         text_units,
         run_strategy,
@@ -77,7 +76,7 @@ async def extract_graph(
         num_threads=num_threads,
         progress_msg="extract graph progress: ",
     )
-    print(results)
+    # print(results)
     entity_dfs = []
     relationship_dfs = []
     for result in results:

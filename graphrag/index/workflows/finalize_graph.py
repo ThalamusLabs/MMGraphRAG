@@ -26,7 +26,6 @@ async def run_workflow(
     context: PipelineRunContext,
 ) -> WorkflowFunctionOutput:
     """All the steps to create the base entity graph."""
-    logger.info("Workflow started: finalize_graph")
     entities = await load_table_from_storage("entities", context.output_storage)
     relationships = await load_table_from_storage(
         "relationships", context.output_storage
@@ -46,7 +45,7 @@ async def run_workflow(
 
     if config.snapshots.graphml:
         # todo: extract graphs at each level, and add in meta like descriptions
-        print("Creating graphml snapshot...")
+        # print("Creating graphml snapshot...")
         graph = create_graph(final_relationships, edge_attr=["weight"])
 
         await snapshot_graphml(
@@ -55,7 +54,6 @@ async def run_workflow(
             storage=context.output_storage,
         )
 
-    logger.info("Workflow completed: finalize_graph")
     return WorkflowFunctionOutput(
         result={
             "entities": entities,

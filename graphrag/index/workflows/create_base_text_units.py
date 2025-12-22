@@ -32,10 +32,14 @@ async def run_workflow(
 
     chunks = config.chunks
 
-    print(documents.columns)
+    # print(documents.columns)
     if  documents["doc_type"].iloc[0] == "jpeg":
 
         output = create_base_image_units(documents=documents)
+
+        print("Created base image units:", len(output))
+        for _, row in output.head(2).iterrows():
+            print(f"ID: {row['id']}, Text length: {len(row['text'])}, n_tokens: {row['n_tokens']}, doc_type: {row['doc_type']}\nText extract:\n{row['text'][:50]}...\n")
 
     else:
         output = create_base_text_units(
@@ -85,7 +89,7 @@ def create_base_text_units(
     chunk_size_includes_metadata: bool = False,
 ) -> pd.DataFrame:
     """All the steps to transform base text_units."""
-    print("Creating base text units with chunk size:", size)
+    # print("Creating base text units with chunk size:", size)
     sort = documents.sort_values(by=["id"], ascending=[True])
 
     sort["text_with_ids"] = list(

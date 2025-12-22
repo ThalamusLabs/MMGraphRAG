@@ -165,17 +165,17 @@ class MultiModalChatLLM:
             # Extract content from response
             content = response.choices[0].message.content or ""
 
-            print("----")  # --- IGNORE ---
-            print("----")  # --- IGNORE ---
-            print("----")  # --- IGNORE ---
-            print("----")  # --- IGNORE ---
-            print("----")  # --- IGNORE ---
-            print(content)
-            print("----")  # --- IGNORE ---
-            print("----")  # --- IGNORE ---
-            print("----")  # --- IGNORE ---
-            print("----")  # --- IGNORE ---
-            print("----")  # --- IGNORE ---
+            # print("----")  # --- IGNORE ---
+            # print("----")  # --- IGNORE ---
+            # print("----")  # --- IGNORE ---
+            # print("----")  # --- IGNORE ---
+            # print("----")  # --- IGNORE ---
+            # print(content)
+            # print("----")  # --- IGNORE ---
+            # print("----")  # --- IGNORE ---
+            # print("----")  # --- IGNORE ---
+            # print("----")  # --- IGNORE ---
+            # print("----")  # --- IGNORE ---
 
             # Build conversation history
             updated_history = messages.copy() if messages else []

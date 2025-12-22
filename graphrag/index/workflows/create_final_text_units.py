@@ -47,6 +47,13 @@ async def run_workflow(
         final_covariates,
     )
 
+    print(output.columns) # Index(['id', 'human_readable_id', 'text', 'n_tokens', 'document_ids',
+    #    'entity_ids', 'relationship_ids', 'covariate_ids'],
+    #   dtype='object')
+    print("Created final text units:", len(output))
+    for _, row in output.head(2).iterrows():
+        print(f"ID: {row['id'][20:]}, Human Readable ID: {row['human_readable_id']}\nText length: {len(row['text'])}, n_tokens: {row['n_tokens']}, Document IDs: {row['document_ids']}\nEntity IDs: {row['entity_ids']}\nRelationship IDs: {row['relationship_ids']}\nCovariate IDs: {row['covariate_ids']}\nText extract:\n{row['text'][:50]}...\n")
+
     await write_table_to_storage(output, "text_units", context.output_storage)
 
     logger.info("Workflow completed: create_final_text_units")

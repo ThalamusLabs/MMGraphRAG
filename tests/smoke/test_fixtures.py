@@ -238,7 +238,7 @@ class TestIndexer:
         query_config: list[dict[str, str]],
     ):
         if workflow_config.get("skip"):
-            print(f"skipping smoke test {input_path})")
+            # print(f"skipping smoke test {input_path})")
             return
 
         azure = workflow_config.get("azure")
@@ -247,21 +247,21 @@ class TestIndexer:
         if azure is not None:
             dispose = asyncio.run(prepare_azurite_data(input_path, azure))
 
-        print("running indexer")
+        # print("running indexer")
         self.__run_indexer(root, input_file_type)
-        print("indexer complete")
+        # print("indexer complete")
 
         if dispose is not None:
             dispose()
 
         if not workflow_config.get("skip_assert"):
-            print("performing dataset assertions")
+            # print("performing dataset assertions")
             self.__assert_indexer_outputs(root, workflow_config)
 
-        print("running queries")
+        # print("running queries")
         for query in query_config:
             result = self.__run_query(root, query)
-            print(f"Query: {query}\nResponse: {result.stdout}")
+            # print(f"Query: {query}\nResponse: {result.stdout}")
 
             assert result.returncode == 0, "Query failed"
             assert result.stdout is not None, "Query returned no output"

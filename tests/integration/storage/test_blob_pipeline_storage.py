@@ -97,7 +97,7 @@ async def test_child():
             await storage.set("test.txt", "Hello, World!", encoding="utf-8")
             items = list(storage.find(re.compile(r".*\.txt$")))
             items = [item[0] for item in items]
-            print("FOUND", items)
+            # print("FOUND", items)
             assert items == ["christmas.txt", "test.txt"]
 
             output = await storage.get("test.txt")
@@ -105,7 +105,7 @@ async def test_child():
 
             items = list(parent.find(re.compile(r".*\.txt$")))
             items = [item[0] for item in items]
-            print("FOUND ITEMS", items)
+            # print("FOUND ITEMS", items)
             assert items == ["input/christmas.txt", "input/test.txt"]
         finally:
             await parent.delete("input/test.txt")

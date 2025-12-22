@@ -32,7 +32,7 @@ async def test_json_loader_one_file_multiple_objects():
     )
     storage = create_storage_from_config(config.storage)
     documents = await create_input(config=config, storage=storage)
-    print(documents)
+    # print(documents)
     assert documents.shape == (3, 4)
     assert documents["title"].iloc[0] == "input.json"
 
