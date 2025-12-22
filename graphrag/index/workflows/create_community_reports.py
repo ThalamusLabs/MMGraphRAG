@@ -135,6 +135,9 @@ async def create_community_reports(
         async_mode=async_mode,
         num_threads=num_threads,
     )
+    print(community_reports.head())
+    print(community_reports.columns)
+    exit()
 
     return finalize_community_reports(community_reports, communities)
 
