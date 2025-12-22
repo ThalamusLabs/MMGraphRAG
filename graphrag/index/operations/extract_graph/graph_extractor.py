@@ -156,7 +156,13 @@ class GraphExtractor:
                     "image_url": {
                         "url": f"data:image/jpeg;base64,{doc.text}"
                     }
-                }
+                },
+                {
+                    "type": "text",
+                    "text": self._extraction_prompt.format(**{
+                    **prompt_variables,
+                    self._input_text_key: doc.text,
+                }),}
             ]})
             response = await self._model.achat(
                 prompt=prompt
