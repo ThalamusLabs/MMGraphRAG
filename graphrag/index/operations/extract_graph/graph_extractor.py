@@ -26,7 +26,7 @@ from graphrag.prompts.index.extract_graph import (
 DEFAULT_TUPLE_DELIMITER = "<|>"
 DEFAULT_RECORD_DELIMITER = "##"
 DEFAULT_COMPLETION_DELIMITER = "<|COMPLETE|>"
-DEFAULT_ENTITY_TYPES = ["organization", "person", "geo", "event"]
+DEFAULT_ENTITY_TYPES = ["object", "location", "event"]
 
 logger = logging.getLogger(__name__)
 
@@ -165,16 +165,16 @@ class GraphExtractor:
                 prompt=doc.text,
                 is_image=True,
             )
-            print("Image analysis response:", response.output.content)
-            print("---------------")
-            print("---------------")
-            print("---------------")
-            print("---------------")
-            print("---------------")
-            print("---------------")
-            print("---------------")
-            print("---------------")
-            print("---------------")
+            # print("Image analysis response:", response.output.content)
+            # print("---------------")
+            # print("---------------")
+            # print("---------------")
+            # print("---------------")
+            # print("---------------")
+            # print("---------------")
+            # print("---------------")
+            # print("---------------")
+            # print("---------------")
         else:
             response = await self._model.achat(
                 self._extraction_prompt.format(**{

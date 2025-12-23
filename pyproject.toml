@@ -69,6 +69,8 @@ dependencies = [
     "litellm>=1.77.1",
     # Image processing (optional, used when InputFileType.image is selected)
     "Pillow>=10.4.0",
+    "weave>=0.52.22",
+    "wandb>=0.23.1",
 ]
 
 [dependency-groups]

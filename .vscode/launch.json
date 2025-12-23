@@ -10,7 +10,7 @@
 			"args": [
 				"index",
 				"--root", 
-				"/Users/abrandsma/main/personal/MMGraphRAG"
+				"/Users/abrandsma/main/personal/MMGraphRAG/christmas",
 			],
 			"console": "integratedTerminal",
 			"python": "${workspaceFolder}/.venv/bin/python",

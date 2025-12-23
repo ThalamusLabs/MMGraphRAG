@@ -56,6 +56,7 @@ async def summarize_communities(
 
     levels = get_levels(nodes)
 
+
     level_contexts = []
     for level in levels:
         level_context = level_context_builder(

@@ -48,7 +48,7 @@ async def run_workflow(
 
     print("Created communities:", len(output))
     for _, row in output.head(2).iterrows():
-        print(f"ID: {row['id'][20:]}, Human Readable ID: {row['human_readable_id']}\nTitle: {row['title']}, Level: {row['level']}, Parent: {row['parent']}, Size: {row['size']}\nEntity IDs: {row['entity_ids']}\nRelationship IDs: {row['relationship_ids']}\nText Unit IDs: {row['text_unit_ids']}\n")
+        print(f"ID: {row['id'][20:]}, Human Readable ID: {row['human_readable_id']}\nTitle: {row['title']}, Level: {row['level']}, Parent: {row['parent']}, Children:{row['children']}, Size: {row['size']}\nCommunity: {row['community']}\nEntity IDs: {row['entity_ids']}\nRelationship IDs: {row['relationship_ids']}\nText Unit IDs: {row['text_unit_ids']}\n")
 
     await write_table_to_storage(output, "communities", context.output_storage)
 

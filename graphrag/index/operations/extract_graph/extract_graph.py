@@ -21,7 +21,7 @@ from graphrag.index.utils.derive_from_rows import derive_from_rows
 logger = logging.getLogger(__name__)
 
 
-DEFAULT_ENTITY_TYPES = ["organization", "person", "geo", "event"]
+DEFAULT_ENTITY_TYPES = ["object", "location", "event"]
 
 
 @weave.op
@@ -56,7 +56,7 @@ async def extract_graph(
             doc_type = row['doc_type']
         except:
             doc_type = 'default'
-            
+        
         result = await strategy_exec(
             [Document(text=text, id=id, doc_type=doc_type)],
             entity_types,

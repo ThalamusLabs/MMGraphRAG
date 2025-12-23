@@ -27,7 +27,7 @@ from graphrag.language_model.manager import ModelManager
 logger = logging.getLogger(__name__)
 
 
-DEFAULT_ENTITY_TYPES = ["organization", "person", "geo", "event"]
+DEFAULT_ENTITY_TYPES = ["object", "location", "event"]
 
 
 @weave.op

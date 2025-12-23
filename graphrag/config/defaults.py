@@ -205,7 +205,7 @@ class ExtractGraphDefaults:
 
     prompt: None = None
     entity_types: list[str] = field(
-        default_factory=lambda: ["organization", "person", "geo", "event"]
+        default_factory=lambda: ["object", "location", "event"]
     )
     max_gleanings: int = 1
     strategy: None = None
