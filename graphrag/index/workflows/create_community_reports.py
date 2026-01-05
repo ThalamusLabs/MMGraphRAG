@@ -140,7 +140,7 @@ async def create_community_reports(
     # print(community_reports.head())
     print(community_reports.columns)
     print("Created community reports:", len(community_reports))
-    exit()
+    assert len(community_reports) != 0, "No community reports were created."
 
     return finalize_community_reports(community_reports, communities)
 

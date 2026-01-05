@@ -85,8 +85,8 @@ async def run_workflow(
     print("Generated embeddings for the following fields:", list(output.keys()))
     print("Number of embeddings generated for each field:", {k: len(v) for k, v in output.items()})
 
-    print(output.columns)
-    exit()
+    print(output.keys()) #Generated embeddings for the following fields: ['entity.description', 'community.full_content', 'text_unit.text']
+    print(output["entity.description"])
 
     if config.snapshots.embeddings:
         for name, table in output.items():

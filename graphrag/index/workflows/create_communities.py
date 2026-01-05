@@ -137,6 +137,7 @@ def create_communities(
         str
     )
     final_communities["parent"] = final_communities["parent"].astype(int)
+    
     # collect the children so we have a tree going both ways
     parent_grouped = cast(
         "pd.DataFrame",
