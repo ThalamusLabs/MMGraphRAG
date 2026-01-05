@@ -19,7 +19,9 @@ from graphrag.index.typing.context import PipelineRunContext
 from graphrag.index.typing.workflow import WorkflowFunctionOutput
 from graphrag.index.utils.hashing import gen_sha512_hash
 from graphrag.utils.storage import load_table_from_storage, write_table_to_storage
-
+from PIL import Image
+import io
+import base64
 logger = logging.getLogger(__name__)
 
 async def run_workflow(
@@ -59,22 +61,67 @@ async def run_workflow(
     logger.info("Workflow completed: create_base_text_units")
     return WorkflowFunctionOutput(result=output)
 
+import pandas as pd
+
 
 @weave.op
 def create_base_image_units(
         documents: pd.DataFrame,
 ) -> pd.DataFrame:
     
-    # Create a new dataframe with the required columns
-    output = pd.DataFrame({
-        "id": documents["id"],
-        "text": documents["text"],
-        "document_ids": documents["id"],  # document_ids is same as id
-        "n_tokens": documents["text"].str.len(),  # n_tokens is length of text
-        "doc_type": documents["doc_type"]  # keep doc_type column
-    })
+    def chunker(base64_image: str, n_chunks: int = 16) -> list[str]:
+        image_bytes = base64.b64decode(base64_image)
+        img = Image.open(io.BytesIO(image_bytes))
+
+        width, height = img.size
+        
+        # Calculate grid size (e.g., 4 chunks = 2x2, 9 chunks = 3x3, 16 chunks = 4x4)
+        grid_size = int(n_chunks ** 0.5)
+        chunk_width = width // grid_size
+        chunk_height = height // grid_size
+
+        result = []
+        for row in range(grid_size):
+            for col in range(grid_size):
+                left = col * chunk_width
+                top = row * chunk_height
+                right = left + chunk_width
+                bottom = top + chunk_height
+                
+                chunk = img.crop((left, top, right, bottom))
+                
+                # Convert RGBA to RGB if needed
+                if chunk.mode == 'RGBA':
+                    chunk = chunk.convert('RGB')
+                
+                # Convert chunk to bytes
+                chunk_bytes = io.BytesIO()
+                chunk.save(chunk_bytes, format='JPEG')
+                chunk_bytes = chunk_bytes.getvalue()
+                
+                result.append(base64.b64encode(chunk_bytes).decode('utf-8'))
+
+        return result
     
+    chunks = chunker(base64_image=documents["text"].iloc[0])
+
+    # Create 4 rows, one for each chunk
+    print(len(chunks))
+    output_data = []
+    for i, chunk in enumerate(chunks):
+        output_data.append({
+            "id": f"{documents['id'].iloc[0]}_{i}",
+            "text": chunk,
+            "document_ids": documents["id"].iloc[0],
+            "n_tokens": len(chunk),
+            "doc_type": documents["doc_type"].iloc[0]
+        })
+
+    output = pd.DataFrame(output_data)
+
     return output
+    
+
 
 @weave.op
 def create_base_text_units(

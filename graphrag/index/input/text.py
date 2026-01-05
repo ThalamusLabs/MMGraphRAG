@@ -29,6 +29,7 @@ async def load_text(
         new_item = {**group, "text": text}
         new_item["id"] = gen_sha512_hash(new_item, new_item.keys())
         new_item["title"] = str(Path(path).name)
+        new_item["doc_type"] = "text"
         new_item["creation_date"] = await storage.get_creation_date(path)
         return pd.DataFrame([new_item])
 
